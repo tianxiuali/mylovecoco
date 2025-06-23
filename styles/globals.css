@@ -33,7 +33,7 @@ body {
   left: 16px;
   display: inline-flex;
   align-items: center;
-  padding: 4px 8px;
+  padding: 4px 0;
   border-radius: 4px;
   color: #444;
   font-size: 22px;
@@ -50,10 +50,10 @@ body {
   top: 20px;
   right: 16px;
   width: 24px;
-  transform: rotate(30deg);
 }
 
 .rabbit.shaking {
+  transform: rotate(30deg);
   animation: shake 1s linear infinite;
 }
 
@@ -68,5 +68,19 @@ body {
 
   75% {
     transform: rotate(50deg);
+  }
+}
+
+.rabbit.rotate {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

@@ -28,13 +28,14 @@ const gifts = [
   }
 ]
 
-export default function Home({ audio }) {
+export default function Home({ audio, onPause }) {
   const [isConfetiShow, setIsConfetiShow] = useState(false)
   const [currentGift, setCurrentGift] = useState({})
   const [isEating, setIsEating] = useState(false)
   const [rightPx, setRightPx] = useState(0)
 
   const cakeRef = useRef(null)
+  const audioRef = useRef(null)
 
   const openGift1 = (gift) => {
     setIsConfetiShow(true)
@@ -46,8 +47,16 @@ export default function Home({ audio }) {
   }
 
   const eatCake = () => {
-    setIsEating(true)
-    audio.pause()
+    setIsEating(!isEating)
+    if (isEating) {
+      audioRef.current.pause()
+    } else {
+      audio.pause()
+      onPause()
+      audioRef.current.play().catch((e) => {
+        console.error('播放失败:', e)
+      })
+    }
   }
 
   useEffect(() => {
@@ -109,6 +118,9 @@ export default function Home({ audio }) {
           </>
         ) : null}
       </div>
+      <audio ref={audioRef} loop>
+        <source src="/music/canon.mp3" type="audio/mp3" />
+      </audio>
     </>
   )
 }

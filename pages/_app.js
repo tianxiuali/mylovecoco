@@ -22,10 +22,19 @@ export default function App({ Component, pageProps }) {
     setIsPlaying(!isPlaying)
   }
 
+  const handlePause = () => {
+    setIsPlaying(false)
+  }
+
   return (
     <>
-      <Component {...pageProps} audio={audioRef.current} />
-      <img src="/image/rabbit.png" alt="" className={`rabbit ${isPlaying ? 'shaking' : ''}`} onClick={toggleMusic} />
+      <Component {...pageProps} audio={audioRef.current} onPause={handlePause} />
+      <img
+        src="/image/rabbit.png"
+        alt=""
+        className={`rabbit ${isPlaying ? 'rotate' : ''}`}
+        onClick={toggleMusic}
+      />
       <audio ref={audioRef} loop>
         <source src="/music/myperson.flac" type="audio/flac" />
       </audio>
